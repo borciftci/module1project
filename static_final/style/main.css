@@ -128,6 +128,15 @@ hr {
     width: 80%;
 }
 
+.avatar:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    height: 48px;
+    width: 48px;
+    background-image: url('/img/no_profile_picture.png');
+}
+
 #blockTerms > hr {
     border: 1px solid #f6dc7c;
 }
