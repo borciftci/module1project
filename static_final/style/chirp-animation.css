@@ -1,0 +1,12 @@
+@keyframes example {
+    0%   {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+  }
+
+
+#chirp:hover {
+    animation-name: example;
+    animation-duration: 2s;
+    cursor: crosshair;
+    -webkit-user-drag: none;
+}

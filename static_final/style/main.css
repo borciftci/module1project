@@ -48,7 +48,7 @@ header > button {
     font-family: Verdana, sans-serif;
     font-weight: bold;
     cursor: pointer;
-    transition: all .2s ease, margin 0;
+    transition: all .4s ease;
 }
 header > button:hover {
     background-color: white;
