@@ -16,4 +16,4 @@ def tweet(ctx, e):
     text = tweet['text']
 
     # generate output
-    emit('tweet', text)
+    emit('tweet', text)  //sus
