@@ -1,0 +1,207 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+}
+
+body {
+    margin: 68px 5px 5px;
+}
+
+
+/* Header */
+header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 60px;
+    background-color: #1c2534;
+    width: 100vw;
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.13); 
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.13);
+}
+header > img {
+    height: 35px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 12.5px;
+}
+header > h1 {
+    text-align: center;
+    margin: 10px auto;
+    color: #fff;
+    font-family: Verdana, sans-serif;
+}
+header > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 100px;
+    margin: 15px 15px; 
+    border: 2px solid white;
+    border-radius: 3px;
+    background-color: #1c2534;
+    color: white;
+    font-size: 15px;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .2s ease, margin 0;
+}
+header > button:hover {
+    background-color: white;
+    color: #1c2534;
+    border-color: #1c2534;
+    border-radius: 4px;
+}
+header > button:active {
+    transform: scale(.9)
+}
+
+@media screen and (min-width: 1600px) {
+    body {
+        width: 1600px;
+        margin: 68px auto 5px;
+    }
+    header > img {
+        left: 50%;
+        margin-left: -790px;
+    }
+    header > #filter {
+        left: 50%;
+        margin-left: 690px;
+    }
+}
+
+
+/* Footer */
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 26px;
+}
+footer > span {
+    display: block;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    color: #aaa;
+    font-size: 13px;
+}
+
+
+.d-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.d-l, .d-m, .d-r {
+    height: calc(100vh - 110px);
+    flex: 1;
+    width: 33.3%;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.d-title {
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    font-size: 19px;
+}
+
+.d-block {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0 10px;
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.23); 
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.23);
+}
+
+hr {   
+    margin: -5px auto 15px;
+    width: 80%;
+}
+
+#blockTerms > hr {
+    border: 1px solid #f6dc7c;
+}
+#blockPopular > hr {
+    border: 1px solid #d2a4a6;
+}
+#blockHashtags > hr {
+    border: 1px solid #142424;
+}
+
+#blockRecent > hr {
+    border: 1px solid #0c989c;
+}
+
+#blockCurrent > hr {
+    border: 1px solid #eea91d;
+}
+#blockChart > hr {
+    border: 1px solid #a0926e;
+}
+
+/* Left side */
+#blockTerms {
+    flex: 0 1 25%;
+}
+#blockPopular {
+    flex: 0 1 50%;
+}
+#blockHashtags {
+    flex: 0 1 25%;
+}
+
+/* Middle */
+#blockCurrent {
+    flex: 0 1 100%;
+    overflow-y: hidden;
+}
+
+/* Right side */
+#blockRecent {
+    flex: 0 1 70%;
+}
+#blockChart {
+    flex: 0 1 30%;
+}
+
+/* Filter Menu */
+#filter-background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    opacity: .4;
+    background-color: #1c2534;
+}
+.filter-contents {
+    width: 800px;
+    height: 600px;
+    position: absolute;
+    left: calc(50% - 400px);
+    top: calc(50% - 300px);
+    background-color: white;
+    padding: 10px;
+    opacity: 1;
+    
+    -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.23); 
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.23);
+}
+.filter-contents > p {
+    position: relative;
+    left: 280px;
+    top: 290px;
+    margin: auto;
+    font-size: 20px;
+    color: #999;
+}
