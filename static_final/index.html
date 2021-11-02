@@ -8,6 +8,7 @@
         <script src="/lib/jquery-2.1.1.min.js"></script>
         <script src="/lib/jquery.flot.min.js"></script>
         <script src="/lib/core.js"></script>
+        <script src="/lib/charts.js"></script>
         <script src="/lib/tweets.js"></script>
         <script src="/lib/log.js"></script>
     </head>
@@ -51,7 +52,7 @@
                 <div id="blockChart" class="d-block">
                     <h2 class="d-title">Amount of Tweets</h1>
                     <hr/>
-                    <div id="tweetAmount" class="d-content"></div>
+                    <div id="tweetAmount" class="d-content" style="height: calc(100% - 80px); width: 100%"></div>
                 </div>
             </div>
         </div>
@@ -71,10 +72,23 @@
             block('#tweetCurrent').tweets({memory:13});
             block('#tweetRecent').tweets({memory:1});
             block('#tweetPopular').tweets({memory:6})
+            block('#tweetAmount').rolling_chart({
+                memory: 60,
+                chart: {
+                    yaxis: {
+                        min: 0,
+                        max: 100,
+                    },
+                    xaxis: {
+                        show: true
+                    }
+                }
+            })
             // connect tweet event to list
             events.connect('tweet', '#tweetCurrent');
             events.connect('tweet', '#tweetRecent');
             events.connect('tweetPopular', '#tweetPopular');
+            events.connect('chart_value', '#tweetAmount')
         </script>
     </body>
 </html>
