@@ -69,6 +69,7 @@
         <script>
             block('#tweetCurrent').tweets({memory:13});
             block('#tweetRecent').tweets({memory:1});
+            block('#tweetPopular').tweets({memory:6})
             // connect tweet event to list
             events.connect('tweet', '#tweetCurrent');
             events.connect('tweet', '#tweetRecent');
