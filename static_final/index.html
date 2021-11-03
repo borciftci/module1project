@@ -75,6 +75,7 @@
         </footer>
 
         <script>
+            block('#tweetTerms').wordcloud();
             block('#tweetHashtags').wordcloud();
             block('#tweetCurrent').tweets({memory:15});
             block('#tweetRecent').tweets({memory:1});
@@ -95,8 +96,9 @@
             events.connect('tweet', '#tweetCurrent');
             events.connect('tweetRecent', '#tweetRecent');
             events.connect('tweetPopular', '#tweetPopular');
-            events.connect('chart_value', '#tweetAmount')
+            events.connect('chart_value', '#tweetAmount');
             events.connect('hashtag', '#tweetHashtags');
+            events.connect('terms', '#tweetTerms');
         </script>
     </body>
 </html>

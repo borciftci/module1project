@@ -162,6 +162,10 @@ hr {
 #blockTerms {
     height: 25%;
 }
+#tweetTerms {
+    width: 100%;
+    height: calc(100% - 80px);
+}
 #blockPopular {
     position: relative;
     height: 50%;

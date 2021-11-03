@@ -1,35 +1,32 @@
 from eca import *
+import re
 
 from eca.generators import start_offline_tweets
 
 root_content_path = 'static_final'
 tweet_amount = 0
 
-def getHashtags(text):
-    x = text.split("#")
+def getTerms(text):
 
-    list1 = []
-    list2 = []
-    def count(list1, c):
-        return list1.count(c)
+    blacklist = ["the","be","to","of","and","a","in","it","for","not","on","with","with","he","as","you","do","at","this","but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there","their","what","so","up","out","if","about","who","get","which","go","me","when","make","can","like","time","no","just","him","know","take","people","into","year","your","good","some","could","them","see","other","than","then","now","look","only","come","its","over","think","also","back","after","use","two","how","our","work","first","well","way","even","new","want","because","any","these","give","day","most","us"]
+    terms = []
+    appearence = []
 
-    i = 1
-    while i < len(x):
-        y = (x[i].split(" "))
-        
+    # remove links within text
+    tweet_cleaned = re.sub(r"http\S+", "", text)
 
-        list1.append(y[0])
-        z = count(list1, y[0])
+    # split into single words
+    wordList = re.compile(r"\w+(?:'\w+)*|[^\w\s]").findall(tweet_cleaned)
+    for v in wordList:
+        if not str.lower(v) in blacklist and len(v) >= 3:
+            if v in terms:
+                i = terms.index(v)
+                appearence[i] += 1
+            else:
+                terms.append(v)
+                appearence.append(1)
 
-        if (y[0], z-1) in list2:
-            list2.remove((y[0], z-1))
-            list2.append((y[0], z))
-        else:
-            list2.append((y[0], z))
-        
-        i += 1
-        
-    return list2
+    return list( zip(terms, appearence) )
 
 @event('init')
 def setup(ctx, e):
@@ -79,9 +76,16 @@ def tweet(ctx, e):
     if "media" in e.data['entities']:
         emit('tweetRecent', e.data, True)
 
+    # Most Popular Terms
+    for t in getTerms(e.data['text']):
+        emit('terms', {
+            'action': 'add',
+            'value': (t[0], t[1])
+        })
+
     # Most Popular Hashtags
-    for w in getHashtags(e.data['text']):
+    for h in e.data['entities']['hashtags']:
         emit('hashtag', {
             'action': 'add',
-            'value': ('#' + w[0], w[1])
+            'value': ('#' + h['text'], 1)
         })
