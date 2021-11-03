@@ -180,6 +180,28 @@ hr {
 #blockRecent {
     height: 70%;
 }
+#tweetRecent {
+    height: calc(100% - 80px);
+    margin-right: 1px;
+    margin-bottom: 1px;
+}
+#tweetRecent > ol > .stream-item {
+    overflow: hidden;
+    height: 100%;
+}
+#tweetRecent > ol > .stream-item > .tweet {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+#recentImg {
+    max-height: 80%;
+    max-width: 100%;
+}
+
 #blockChart {
     height: 30%;
 }
@@ -214,4 +236,14 @@ hr {
     margin: auto;
     font-size: 20px;
     color: #999;
+}
+
+@keyframes tweet-appear {
+    0%   {transform: scale(0.98);}
+    100% {transform: scale(1);}
+  }
+
+.stream-item {
+    animation-duration: .3s;
+    animation-name: tweet-appear;
 }

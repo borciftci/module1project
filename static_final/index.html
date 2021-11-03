@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="/style/layout.css"/>
         <link rel="stylesheet" href="/style/theme.css"/>
         <link rel="stylesheet" href="/style/main.css"/>
@@ -69,9 +70,9 @@
         </footer>
 
         <script>
-            block('#tweetCurrent').tweets({memory:13});
+            block('#tweetCurrent').tweets({memory:15});
             block('#tweetRecent').tweets({memory:1});
-            block('#tweetPopular').tweets({memory:6})
+            block('#tweetPopular').tweets({memory:8})
             block('#tweetAmount').rolling_chart({
                 memory: 60,
                 chart: {
@@ -86,7 +87,7 @@
             })
             // connect tweet event to list
             events.connect('tweet', '#tweetCurrent');
-            events.connect('tweet', '#tweetRecent');
+            events.connect('tweetRecent', '#tweetRecent');
             events.connect('tweetPopular', '#tweetPopular');
             events.connect('chart_value', '#tweetAmount')
         </script>

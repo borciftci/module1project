@@ -79,7 +79,7 @@ block.fn.tweets = function(config) {
 
 
     // register default handler for handling tweet data
-    this.actions(function(e, tweet){
+    this.actions(function(e, tweet, mostRecent = false){
         var $item = $('<li class="stream-item"></li>');
 
         var $tweet = $('<div class="tweet"></div>');
@@ -112,6 +112,13 @@ block.fn.tweets = function(config) {
 
         // Build outer structure of containing divs:
         $tweet.append($content);
+
+        // Add image for "Most Recent" block
+        if ($list[0].parentNode.id == 'tweetRecent') {
+            $picture = $('<img id="recentImg" src="' + tweet.entities.media[0].media_url + '" onerror="this.src=\'/img/picture_error.jpg\'"/>');
+            $tweet.prepend($picture);
+        }
+
         $item.append($tweet);
         
         // place new tweet in front of list 

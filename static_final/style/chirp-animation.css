@@ -7,6 +7,5 @@
 #chirp:hover {
     animation-name: example;
     animation-duration: 2s;
-    cursor: crosshair;
     -webkit-user-drag: none;
 }
