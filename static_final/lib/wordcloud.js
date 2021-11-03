@@ -57,7 +57,7 @@
 
         var redraw = function() {
             if(!dirty) {
-                window.setTimeout(redraw, 500);
+                window.setTimeout(redraw, 5000);
                 return;
             }
 
@@ -84,7 +84,7 @@
             $($container).empty().jQCloud(result,$.extend(options.options,{delayedMode: false}));
 
             dirty = false;
-            window.setTimeout(redraw, 500);
+            window.setTimeout(redraw, 5000);
         }
 
         var reset = function() {
@@ -104,7 +104,7 @@
         });
 
         // start redraw loop
-        window.setTimeout(redraw, 500);
+        window.setTimeout(redraw, 5000);
 
         // return element to allow further work
         return this.$element;

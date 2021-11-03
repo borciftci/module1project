@@ -20,7 +20,7 @@
         <header>
             <img id="chirp" src="/img/twitter_logo.png"/>
             <h1>Twitter Sports Dashboard</h1>
-            <button id="filter" onClick="document.getElementById('filter-menu').style.display = 'block';">filter</button>
+            <button id="filter" onClick="document.getElementById('filter-menu').style.display = 'block';" data-filtering="false" data-filters="">filter</button>
         </header>
         <div class="d-container">
             <div class="d-l">
@@ -65,8 +65,12 @@
         <div id="filter-menu" style="display: none;">
             <div id="filter-background" onClick="document.getElementById('filter-menu').style.display = 'none'">
             </div>
-            <div class="filter-contents">
-                <p>Some filter options here...</p>
+            <div class="filter-wrapper">
+                <div class="filter-contents">
+                    <input id="custom-terms" placeholder="Your filter terms here" value=""/>
+                    <button id="deactivateFilterButton" onClick="filterDeactivate();" style="display: none;">Deactivate filter</button>
+                    <button id="setFilterButton" onClick="filter();">Activate filter</button>
+                </div>
             </div>
         </div>
 
@@ -99,6 +103,23 @@
             events.connect('chart_value', '#tweetAmount');
             events.connect('hashtag', '#tweetHashtags');
             events.connect('terms', '#tweetTerms');
+
+            function filter() {
+                terms = document.getElementById('custom-terms').value;
+
+                document.getElementById('filter').dataset.filtering = true;
+                document.getElementById('filter').dataset.filters = terms;
+                document.getElementById('setFilterButton').innerHTML = "Update filter";
+                document.getElementById('deactivateFilterButton').style.display = "block";
+                document.getElementById('filter-menu').style.display = 'none';
+            }
+
+            function filterDeactivate() {
+                document.getElementById('filter').dataset.filtering = false;
+                document.getElementById('setFilterButton').innerHTML = "Activate filter";
+                document.getElementById('deactivateFilterButton').style.display = "none";
+                document.getElementById('filter-menu').style.display = 'none';
+            }
         </script>
     </body>
 </html>

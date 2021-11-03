@@ -66,6 +66,23 @@ var process_entities = function(message, entities) {
     return result;
 }
 
+var filterCheck = function(data) {
+    if (document.getElementById('filter').dataset.filtering == "true") {
+        var terms = document.getElementById('filter').dataset.filters.split(" ")
+        var pass = false
+    
+        for (var term of terms) {
+            if (data['text'].includes(term)) {
+                pass = true;
+            }
+        };
+
+        return pass
+    } else {
+        return true
+    }
+}
+
 block.fn.tweets = function(config) {
     var options = $.extend({
         memory: 20
@@ -80,49 +97,52 @@ block.fn.tweets = function(config) {
 
     // register default handler for handling tweet data
     this.actions(function(e, tweet, mostRecent = false){
-        var $item = $('<li class="stream-item"></li>');
+        // Check tweet for filter terms
+        if (filterCheck(tweet)) {
+            var $item = $('<li class="stream-item"></li>');
 
-        var $tweet = $('<div class="tweet"></div>');
-        var $content = $('<div class="content"></div>');
-        var $header = $('<div class="stream-item-header"></div>');
+            var $tweet = $('<div class="tweet"></div>');
+            var $content = $('<div class="content"></div>');
+            var $header = $('<div class="stream-item-header"></div>');
 
-        // Build a tag image and header:
-        var $account = $('<a class="account-group"></a>');
-        $account.attr("href", "http://twitter.com/" + tweet.user.screen_name);
+            // Build a tag image and header:
+            var $account = $('<a class="account-group"></a>');
+            $account.attr("href", "http://twitter.com/" + tweet.user.screen_name);
 
-        var $avatar = $("<img>").addClass("avatar");
-        $avatar.attr("src", tweet.user.profile_image_url);
-        $account.append($avatar);
-        $account.append($('<strong class="fullname">' + tweet.user.name + '</strong>'));
-        $account.append($('<span>&nbsp;</span>'));
-        $account.append($('<span class="username"><s>@</s><b>' + tweet.user.screen_name + '</b></span>'));
-        $header.append($account);
+            var $avatar = $("<img>").addClass("avatar");
+            $avatar.attr("src", tweet.user.profile_image_url);
+            $account.append($avatar);
+            $account.append($('<strong class="fullname">' + tweet.user.name + '</strong>'));
+            $account.append($('<span>&nbsp;</span>'));
+            $account.append($('<span class="username"><s>@</s><b>' + tweet.user.screen_name + '</b></span>'));
+            $header.append($account);
 
-        // Build timestamp:
-        var $time = $('<small class="time"></small>');
-        $time.append($('<span>' + tweet.created_at + '</span>'));
+            // Build timestamp:
+            var $time = $('<small class="time"></small>');
+            $time.append($('<span>' + tweet.created_at + '</span>'));
 
-        $header.append($time);
-        $content.append($header);
+            $header.append($time);
+            $content.append($header);
 
-        // Build contents:
-        var text = process_entities(tweet.text, tweet.entities);
-        var $text = $('<p class="tweet-text">' + text + '</p>');
-        $content.append($text);
+            // Build contents:
+            var text = process_entities(tweet.text, tweet.entities);
+            var $text = $('<p class="tweet-text">' + text + '</p>');
+            $content.append($text);
 
-        // Build outer structure of containing divs:
-        $tweet.append($content);
+            // Build outer structure of containing divs:
+            $tweet.append($content);
 
-        // Add image for "Most Recent" block
-        if ($list[0].parentNode.id == 'tweetRecent') {
-            $picture = $('<img id="recentImg" src="' + tweet.entities.media[0].media_url + '" onerror="this.src=\'/img/picture_error.jpg\'"/>');
-            $tweet.prepend($picture);
+            // Add image for "Most Recent" block
+            if ($list[0].parentNode.id == 'tweetRecent') {
+                $picture = $('<img id="recentImg" src="' + tweet.entities.media[0].media_url + '" onerror="this.src=\'/img/picture_error.jpg\'"/>');
+                $tweet.prepend($picture);
+            }
+
+            $item.append($tweet);
+            
+            // place new tweet in front of list 
+            $list.prepend($item);
         }
-
-        $item.append($tweet);
-        
-        // place new tweet in front of list 
-        $list.prepend($item);
 
         // remove stale tweets
         if ($list.children().size() > options.memory) {
