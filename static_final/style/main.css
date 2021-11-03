@@ -170,6 +170,10 @@ hr {
 #blockHashtags {
     height: 25%;
 }
+#tweetHashtags {
+    width: 100%;
+    height: calc(100% - 80px);
+}
 
 /* Middle */
 #blockCurrent {

@@ -13,12 +13,36 @@
         var worddata_dict = {};
         var dirty = false;
 
+        // sort dictionary (used in addword)
+        var sort_obj = function(obj, slice) {
+            items = Object.keys(obj).map(function(key) {
+                return [key, obj[key]];
+            });
+            items.sort(function(first, second) {
+                return second[1] - first[1];
+            });
+            items = items.slice(0, slice)
+            var sorted_obj = {}
+            $.each(items, function(k, v) {
+                use_key = v[0]
+                use_value = v[1]
+                sorted_obj[use_key] = use_value
+            })
+            return(sorted_obj)
+        } 
+
         var addword = function(label, value) {
             if (worddata_dict.hasOwnProperty(label)) {
                 worddata_dict[label] += value;
             } else {
                 worddata_dict[label] = value;
             }
+
+            // top of length
+            if (Object.keys(worddata_dict).length > 20) {
+                worddata_dict = sort_obj(worddata_dict, 20)
+            }
+
             flag_dirty();
         }
 
