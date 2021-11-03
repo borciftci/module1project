@@ -39,8 +39,8 @@
             }
 
             // top of length
-            if (Object.keys(worddata_dict).length > 20) {
-                worddata_dict = sort_obj(worddata_dict, 20)
+            if (Object.keys(worddata_dict).length > 30) {
+                worddata_dict = sort_obj(worddata_dict, 30)
             }
 
             flag_dirty();
