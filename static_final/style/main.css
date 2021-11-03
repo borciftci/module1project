@@ -163,6 +163,7 @@ hr {
     height: 25%;
 }
 #blockPopular {
+    position: relative;
     height: 50%;
     overflow: hidden;
 }
@@ -172,14 +173,47 @@ hr {
 
 /* Middle */
 #blockCurrent {
+    position: relative;
     flex: 0 1 100%;
     overflow-y: hidden;
+}
+
+.blockGradient {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 90%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
 }
 
 /* Right side */
 #blockRecent {
     height: 70%;
 }
+#tweetRecent {
+    height: calc(100% - 80px);
+    margin-right: 1px;
+    margin-bottom: 1px;
+}
+#tweetRecent > ol > .stream-item {
+    overflow: hidden;
+    height: 100%;
+}
+#tweetRecent > ol > .stream-item > .tweet {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+#recentImg {
+    max-height: 80%;
+    max-width: 100%;
+}
+
 #blockChart {
     height: 30%;
 }
@@ -214,4 +248,14 @@ hr {
     margin: auto;
     font-size: 20px;
     color: #999;
+}
+
+@keyframes tweet-appear {
+    0%   {transform: scale(0.98);}
+    100% {transform: scale(1);}
+  }
+
+.stream-item {
+    animation-duration: .3s;
+    animation-name: tweet-appear;
 }

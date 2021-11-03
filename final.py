@@ -47,3 +47,8 @@ def tweet(ctx, e):
     # output for "Popular Tweets"
     if e.data['user']['verified'] == True:
         emit('tweetPopular', e.data)
+
+
+    # e.data['entities']['media'][0]['media_url']
+    if "media" in e.data['entities']:
+        emit('tweetRecent', e.data, True)
