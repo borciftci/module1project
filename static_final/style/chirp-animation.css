@@ -1,0 +1,12 @@
+@keyframes example {
+    0%   {transform: rotate3d(1, 1, 1, 0deg) scale(1)}
+    100% {transform: rotate3d(2, 3, 1, 360deg) scale(1)}
+  }
+
+
+#chirp:hover {
+    animation-name: example;
+    animation-duration: 2s;
+    cursor: crosshair;
+    -webkit-user-drag: none;
+}

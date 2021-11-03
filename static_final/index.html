@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/style/layout.css"/>
+        <link rel="stylesheet" href="/style/theme.css"/>
+        <link rel="stylesheet" href="/style/main.css"/>
+        <link rel="stylesheet" href="/style/chirp-animation.css"/>
+        <script src="/lib/jquery-2.1.1.min.js"></script>
+        <script src="/lib/jquery.flot.min.js"></script>
+        <script src="/lib/core.js"></script>
+        <script src="/lib/charts.js"></script>
+        <script src="/lib/tweets.js"></script>
+        <script src="/lib/log.js"></script>
+    </head>
+    <body>
+        <header>
+            <img id="chirp" src="/img/twitter_logo.png"/>
+            <h1>Twitter Sports Dashboard</h1>
+            <button id="filter" onClick="document.getElementById('filter-menu').style.display = 'block';">filter</button>
+        </header>
+        <div class="d-container">
+            <div class="d-l">
+                <div id="blockTerms" class="d-block">
+                    <h2 class="d-title">Popular Terms</h1>
+                    <hr/>
+                    <div id="tweetTerms" class="d-content"></div>
+                </div>
+                <div id="blockPopular" class="d-block">
+                    <h2 class="d-title">Most Popular Tweets</h1>
+                    <hr/>
+                    <div id="tweetPopular" class="d-content"></div>
+                </div>
+                <div id="blockHashtags" class="d-block">
+                    <h2 class="d-title">Popular Hashtags</h1>
+                    <hr/>
+                    <div id="tweetHashtags" class="d-content"></div>
+                </div>
+            </div>
+            <div class="d-m"> 
+                <div id="blockCurrent" class="d-block">
+                    <h2 class="d-title">Current Tweets</h1>
+                    <hr/>
+                    <div id="tweetCurrent" class="d-content"></div>
+                </div>
+            </div>
+            <div class="d-r"> 
+                <div id="blockRecent" class="d-block">
+                    <h2 class="d-title">Most Recent</h1>
+                    <hr/>
+                    <div id="tweetRecent" class="d-content"></div>
+                </div>
+                <div id="blockChart" class="d-block">
+                    <h2 class="d-title">Amount of Tweets</h1>
+                    <hr/>
+                    <div id="tweetAmount" class="d-content" style="height: calc(100% - 80px); width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <div id="filter-menu" style="display: none;">
+            <div id="filter-background" onClick="document.getElementById('filter-menu').style.display = 'none'">
+            </div>
+            <div class="filter-contents">
+                <p>Some filter options here...</p>
+            </div>
+        </div>
+
+        <footer>
+            <span>Creation of students at University of Twente - 2021</span>
+        </footer>
+
+        <script>
+            block('#tweetCurrent').tweets({memory:13});
+            block('#tweetRecent').tweets({memory:1});
+            block('#tweetPopular').tweets({memory:6})
+            block('#tweetAmount').rolling_chart({
+                memory: 60,
+                chart: {
+                    yaxis: {
+                        min: 0,
+                        max: 100,
+                    },
+                    xaxis: {
+                        show: true
+                    }
+                }
+            })
+            // connect tweet event to list
+            events.connect('tweet', '#tweetCurrent');
+            events.connect('tweet', '#tweetRecent');
+            events.connect('tweetPopular', '#tweetPopular');
+            events.connect('chart_value', '#tweetAmount')
+        </script>
+    </body>
+</html>
