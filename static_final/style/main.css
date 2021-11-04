@@ -76,18 +76,18 @@ header > button:active {
     animation-iteration-count: infinite;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1280px) {
     body {
-        width: 1600px;
+        width: 1280px;
         margin: 68px auto 5px;
     }
     header > img {
         left: 50%;
-        margin-left: -790px;
+        margin-left: -630px;
     }
     header > #filter {
         left: 50%;
-        margin-left: 690px;
+        margin-left: 530px;
     }
 }
 
@@ -257,7 +257,7 @@ hr {
     height: 435px;
     position: absolute;
     left: calc(50% - 400px);
-    top: calc(50% - 300px);
+    top: calc(50% - 212.5px);
     background-color: white;
     padding: 10px;
     opacity: 1;
