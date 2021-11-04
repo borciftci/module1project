@@ -66,6 +66,7 @@ var process_entities = function(message, entities) {
     return result;
 }
 
+// implementation of filter function visible on page
 var filterCheck = function(data) {
     if (document.getElementById('filter').dataset.filtering == "true") {
         var terms = document.getElementById('filter').dataset.filters.split(",")
