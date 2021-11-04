@@ -66,8 +66,25 @@
             <div id="filter-background" onClick="document.getElementById('filter-menu').style.display = 'none'">
             </div>
             <div class="filter-wrapper">
+                <div class="filter-header">Filter options</div>
                 <div class="filter-contents">
-                    <input id="custom-terms" placeholder="Your filter terms here" value=""/>
+                    <div class="filter-options">
+                        <p class="filter-group-title">Custom filter</p>
+                        <hr id="hr-filter-cus"/>
+                        <input id="custom-terms" placeholder="Terms,I,want,for,my,filter" value=""/>
+                        <p class="filter-group-title">Predefined filters</p>
+                        <hr id="hr-filter-pre"/>
+                        <div id="predefined-terms">
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="football">football</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="basketball">basketball</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="cricket">cricket</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="rugby">rugby</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="baseball">baseball</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="volleyball">volleyball</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="tennis">tennis</button>
+                            <button class="filter-term" data-active="false" onClick="switchTerm(this)" value="soccer">soccer</button>
+                        </div>
+                    </div>
                     <button id="deactivateFilterButton" onClick="filterDeactivate();" style="display: none;">Deactivate filter</button>
                     <button id="setFilterButton" onClick="filter();">Activate filter</button>
                 </div>
@@ -106,6 +123,13 @@
 
             function filter() {
                 terms = document.getElementById('custom-terms').value;
+                selected = document.querySelectorAll('.filter-term[data-active="true"]')
+                for (var v of selected) {
+                    terms = terms + "," + v.value;
+                }
+                if (terms.split(",")[0] == "") {
+                    terms = terms.slice(1)
+                }
 
                 document.getElementById('filter').dataset.filtering = true;
                 document.getElementById('filter').dataset.filters = terms;
@@ -119,6 +143,14 @@
                 document.getElementById('setFilterButton').innerHTML = "Activate filter";
                 document.getElementById('deactivateFilterButton').style.display = "none";
                 document.getElementById('filter-menu').style.display = 'none';
+            }
+
+            function switchTerm(e) {
+                if (e.dataset.active == 'true') {
+                    e.dataset.active = false;
+                } else {
+                    e.dataset.active = true;
+                }
             }
         </script>
     </body>

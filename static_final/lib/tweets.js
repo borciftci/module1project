@@ -68,7 +68,7 @@ var process_entities = function(message, entities) {
 
 var filterCheck = function(data) {
     if (document.getElementById('filter').dataset.filtering == "true") {
-        var terms = document.getElementById('filter').dataset.filters.split(" ")
+        var terms = document.getElementById('filter').dataset.filters.split(",")
         var pass = false
     
         for (var term of terms) {
